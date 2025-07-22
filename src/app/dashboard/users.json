@@ -1,0 +1,122 @@
+[
+  {
+    "userID": 1,
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice.johnson@example.com"
+  },
+  {
+    "userID": 2,
+    "firstName": "Bob",
+    "lastName": "Miller",
+    "email": "bob.miller@example.com"
+  },
+  {
+    "userID": 3,
+    "firstName": "Charlie",
+    "lastName": "Smith",
+    "email": "charlie.smith@example.com"
+  },
+  {
+    "userID": 4,
+    "firstName": "Diana",
+    "lastName": "Lopez",
+    "email": "diana.lopez@example.com"
+  },
+  {
+    "userID": 5,
+    "firstName": "Ethan",
+    "lastName": "Brown",
+    "email": "ethan.brown@example.com"
+  },
+  {
+    "userID": 6,
+    "firstName": "Fiona",
+    "lastName": "Taylor",
+    "email": "fiona.taylor@example.com"
+  },
+  {
+    "userID": 7,
+    "firstName": "George",
+    "lastName": "White",
+    "email": "george.white@example.com"
+  },
+  {
+    "userID": 8,
+    "firstName": "Hannah",
+    "lastName": "Walker",
+    "email": "hannah.walker@example.com"
+  },
+  {
+    "userID": 9,
+    "firstName": "Ian",
+    "lastName": "Green",
+    "email": "ian.green@example.com"
+  },
+  {
+    "userID": 10,
+    "firstName": "Julia",
+    "lastName": "Adams",
+    "email": "julia.adams@example.com"
+  },
+  {
+    "userID": 1,
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice.johnson@example.com"
+  },
+  {
+    "userID": 2,
+    "firstName": "Bob",
+    "lastName": "Miller",
+    "email": "bob.miller@example.com"
+  },
+  {
+    "userID": 3,
+    "firstName": "Charlie",
+    "lastName": "Smith",
+    "email": "charlie.smith@example.com"
+  },
+  {
+    "userID": 4,
+    "firstName": "Diana",
+    "lastName": "Lopez",
+    "email": "diana.lopez@example.com"
+  },
+  {
+    "userID": 5,
+    "firstName": "Ethan",
+    "lastName": "Brown",
+    "email": "ethan.brown@example.com"
+  },
+  {
+    "userID": 6,
+    "firstName": "Fiona",
+    "lastName": "Taylor",
+    "email": "fiona.taylor@example.com"
+  },
+  {
+    "userID": 7,
+    "firstName": "George",
+    "lastName": "White",
+    "email": "george.white@example.com"
+  },
+  {
+    "userID": 8,
+    "firstName": "Hannah",
+    "lastName": "Walker",
+    "email": "hannah.walker@example.com"
+  },
+  {
+    "userID": 9,
+    "firstName": "Ian",
+    "lastName": "Green",
+    "email": "ian.green@example.com"
+  },
+  {
+    "userID": 122,
+    "firstName": "Julia",
+    "lastName": "Adams",
+    "email": "julia.adams@example.com"
+  }
+]
