@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -20,7 +20,7 @@ export async function SignIn(email: any, password:any) {
   const validationFields = SignupFormSchema.safeParse(data);
 
   if (!validationFields.success) {
-    return alert('The password must be 8+ letters.\nThe email should have the schema of an email.')
+    return 'The password must be 8+ letters.\nThe email should have the schema of an email.'
   }
 
   //request to signin

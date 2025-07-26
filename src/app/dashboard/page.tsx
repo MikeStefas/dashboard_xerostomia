@@ -1,25 +1,13 @@
 "use client";
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import {DashboardDataGrid,MyAppBar,theme} from './utils';
-import { ViewPatients } from './get.patients';
+import { MyAppBar,theme} from './utils';
+import { ViewPatients } from './funcs/get.patients';
 import { useEffect } from 'react';
+import { DashboardDataGrid, shapeRows } from './datagrid';
 
 
-export function shapeRows(patients: any[]) {
-//the rows have to be loaded with the users
 
-patients = patients.map((item,index) => ({
-  id: index + 1, 
-  userID: item.userID,
-  firstName:'TODO',
-  lastName: 'TODO',
-  email: item.email,
-  userData : "button",
-  reports: "button",
-}));
-  return patients;
-}
 
 
 export default function DashboardPage() {
