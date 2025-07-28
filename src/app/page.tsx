@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { Button, Typography, Box } from '@mui/material';
+import { BLUE } from '@/constants';
 
 export default function Home() {
   return (
@@ -15,10 +16,10 @@ export default function Home() {
       gap: '1rem'
     }}>
       <Box>
-        <Typography variant="h4" fontWeight="bold" sx={{ color: '#309bf1' }}>
+        <Typography variant="h4" fontWeight="bold" sx={{ color: BLUE }}>
           SmileCheck Clinician Dashboard
         </Typography>
-        <Typography variant="subtitle1" sx={{ color: '#309bf1' }}>
+        <Typography variant="subtitle1" sx={{ color: BLUE }}>
           Monitor your patients
         </Typography>
       </Box>

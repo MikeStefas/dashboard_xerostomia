@@ -1,5 +1,5 @@
 'use server';
-import {SignupFormSchema} from "../type";
+import {SigninFormSchema} from "../type";
 import { redirect } from "next/navigation";
 import {BACKEND_URL} from "@/constants";
 import { cookies } from 'next/headers';
@@ -12,12 +12,12 @@ interface TokenPayload {
 }
 
 
-export async function SignIn(email: any, password:any) {
+export async function SignIn(email: string, password:string) {
 
   const data = { email : email, password: password };
 
   //validate the email and password 
-  const validationFields = SignupFormSchema.safeParse(data);
+  const validationFields = SigninFormSchema.safeParse(data);
 
   if (!validationFields.success) {
     return 'The password must be 8+ letters.\nThe email should have the schema of an email.'

@@ -3,17 +3,19 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { IconButton, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { SignIn } from "./signinfunc";
 import { useState } from 'react';
 import { BLUE } from '@/constants';
+import { SignUp } from './signupfunc';
 
 
-export default function SignInPage() {
+
+export default function SignUpPage() {
 
   //variables set in page.tsx
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
   
     //function for setEmail
     function UpdateEmail(event: React.ChangeEvent<HTMLInputElement>) {
@@ -26,6 +28,14 @@ export default function SignInPage() {
       setPassword(event.target.value);
     }
   
+    function UpdateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
+      setFirstName(event.target.value);
+    }
+
+    function UpdateLastName(event: React.ChangeEvent<HTMLInputElement>) {
+      setLastName(event.target.value);
+    }
+
 
   return (
     <div
@@ -58,7 +68,7 @@ export default function SignInPage() {
               marginBottom: '1rem',
             }}
           >
-            Sign In to the SmileCheck Dashboard
+            Sign Up to the SmileCheck Dashboard
           </div>
           <div style={{ marginBottom: '1rem' }}>
             <TextField
@@ -69,7 +79,7 @@ export default function SignInPage() {
               onChange={UpdateEmail}
             />
           </div>
-          <div>
+          <div style={{ marginBottom: '1rem' }}>
             <TextField
               label="Password"
               type="password"
@@ -77,6 +87,26 @@ export default function SignInPage() {
               fullWidth
               sx={{ backgroundColor: '#7d7979ff', borderRadius: '4px' }}
               onChange={UpdatePassword}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <TextField
+              label="First Name"
+              type="firstName"
+              variant="filled"
+              fullWidth
+              sx={{ backgroundColor: '#7d7979ff', borderRadius: '4px' }}
+              onChange={UpdateFirstName}
+            />
+          </div>
+          <div>
+            <TextField
+              label="Last Name"
+              type="lastName"
+              variant="filled"
+              fullWidth
+              sx={{ backgroundColor: '#7d7979ff', borderRadius: '4px' }}
+              onChange={UpdateLastName}
             />
           </div>
           <div
@@ -88,7 +118,7 @@ export default function SignInPage() {
           >
             <IconButton
               onClick={async ()=>{
-                const result = await SignIn(email,password);
+                const result = await SignUp(email,password,firstName,lastName);
                 if(result != undefined){
                   alert(result)
                 }}}

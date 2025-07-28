@@ -87,7 +87,7 @@ export function reportButton(){
 
 
 //styles
-const dataGridSx = {
+export const dataGridSx = {
   '& .MuiDataGrid-cell': { fontSize: '1.2rem' },
   '& .MuiDataGrid-columnHeaders': { fontSize: '1.2rem', fontWeight: 'bold' },
   color: 'white',
@@ -97,11 +97,11 @@ const dataGridSx = {
   boxShadow: 3,
 };
 
-const dataGridInitialState = {
+export const dataGridInitialState = {
   pagination: { paginationModel: { pageSize: 5 } },
 };
 
-const pageSizeOptions = [5, 10, 15, { value: -1, label: "All"}];
+export const pageSizeOptions = [5, 10, 15, { value: -1, label: "All"}];
 
 
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { MyAppBar,theme} from './utils';
-import { ViewPatients } from './funcs/get.patients';
+import { ViewPatients } from './funcs/viewpatients';
 import { useEffect } from 'react';
 import { DashboardDataGrid, shapeRows } from './datagrid';
 
@@ -26,11 +26,8 @@ useEffect(() => {
     fetchData();
   }, []); 
   return (<>
-  
   <ThemeProvider theme={theme}>
-  
     <MyAppBar />
-    
     {DashboardDataGrid(shapeRows(patients))}
     </ThemeProvider>
     </>
