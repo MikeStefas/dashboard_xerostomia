@@ -1,0 +1,29 @@
+/* SignUpPage.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* Using a CSS variable for the blue color */
+  color: #309bf1;
+  margin-bottom: 1rem;
+}
+
+.textFieldContainer {
+  margin-bottom: 1rem;
+}
+
+.loginButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

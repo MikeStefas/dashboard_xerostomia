@@ -1,7 +1,5 @@
 "use client";
-
 import { Button, IconButton} from '@mui/material';
-
 import { createTheme} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { Logout } from '@mui/icons-material';
-import { LogoutFunc } from './funcs/logout';
+import { LogoutFunc } from '@/funcs/logout';
 
 export function MyAppBar(){
   return(

@@ -1,9 +1,9 @@
 'use server';
-import {SigninFormSchema} from "../type";
 import { redirect } from "next/navigation";
 import {BACKEND_URL} from "@/constants";
 import { cookies } from 'next/headers';
 import  { jwtDecode }  from "jwt-decode";
+import { SigninFormSchema } from "@/app/auth/credentialtypes";
 
 interface TokenPayload {
   sub: number;

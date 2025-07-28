@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { MyAppBar,theme} from './utils';
-import { ViewPatients } from './funcs/viewpatients';
 import { useEffect } from 'react';
 import { DashboardDataGrid, shapeRows } from './datagrid';
+import { ViewPatients } from '@/funcs/viewpatients';
 
 
 

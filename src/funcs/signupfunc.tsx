@@ -1,7 +1,8 @@
 'use server';
-import {SignupFormSchema} from "../type";
+
 import { redirect } from "next/navigation";
 import {BACKEND_URL} from "@/constants";
+import { SignupFormSchema } from "@/app/auth/credentialtypes";
 
 
 

@@ -1,10 +1,11 @@
-import { ViewUserData } from "./funcs/viewuserdata";
+
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from '@mui/x-data-grid/models/colDef';
 import { Button } from '@mui/material';
 import { redirect } from "next/navigation";
+import { ViewUserData } from '@/funcs/viewuserdata';
 
 //the grid
 export function DashboardDataGrid(rows :any) {
