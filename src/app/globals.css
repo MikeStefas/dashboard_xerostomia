@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #4D4545;
+  --background: #393232;
   --foreground: white;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #4D4545;
+    --background: #393232;
     --foreground: white;
   }
 }
@@ -23,4 +23,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* scrollbar*/
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: white; 
+  border-radius: 5px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #544f4f; 
 }

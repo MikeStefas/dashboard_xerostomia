@@ -2,8 +2,7 @@
 import { cookies } from 'next/headers';
 import {BACKEND_URL} from "@/constants";
 
-export async function ViewUserReports() {
-  const userID = 13;
+export async function ViewUserReports(userID:number) {
   const cookieStore = await cookies();
 
   //fetch data

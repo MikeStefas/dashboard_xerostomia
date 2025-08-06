@@ -3,33 +3,73 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from '@mui/x-data-grid/models/colDef';
-import { Button } from '@mui/material';
+import { Button, DialogContent } from '@mui/material';
 import { redirect } from "next/navigation";
-import { ViewUserData } from '@/funcs/viewuserdata';
-
+import { CurrentUserIDContext } from '../layout';
+import Box from '@mui/material/Box';
+import { useContext, useState, useRef } from 'react';
+import {UserDialog } from './userdialog';
+import { useRouter } from "next/navigation";
+import { set } from 'zod';
+import { loader } from '../auth/signin/loader';
 //the grid
 export function DashboardDataGrid(rows :any) {
-  return (<div className='px-30 py-20'>
-
+  
+  return (
+    <Box sx={boxSx}>
       <DataGrid
       rows={rows}
       columns={columns}
       sx={dataGridSx}
       initialState={dataGridInitialState}
-      pageSizeOptions={pageSizeOptions}
+      hideFooter
       />
       
-    </div>)}
+    </Box>
+      )}
 
 //cols
 export const columns: GridColDef[] = [
-  { field: 'userID', headerName: 'User ID', flex: 0.25},
-  { field: 'firstName', headerName: 'First Name', flex: 0.5},
-  { field: 'lastName', headerName: 'Last Name', flex: 0.5,},
-  { field: 'email', headerName: 'Email', flex: 0.75,},
-  { field: 'userData', headerName: 'User Data', flex: 0.5 , renderCell: (params:any) => (userDataButton(params.row.userID)), headerAlign: 'center'},
-  { field: 'reports', headerName: 'Reports', flex: 0.5, renderCell: () => (reportButton()), headerAlign: 'center' },
-
+  { 
+    field: 'userID', 
+    headerName: 'User ID', 
+    flex: 0.25, 
+    minWidth: 100 // Ensures this column is at least 100px wide
+  },
+  { 
+    field: 'firstName', 
+    headerName: 'First Name', 
+    flex: 0.5,
+    minWidth: 120 // Ensures this column is at least 120px wide
+  },
+  { 
+    field: 'lastName', 
+    headerName: 'Last Name', 
+    flex: 0.5,
+    minWidth: 120
+  },
+  { 
+    field: 'email', 
+    headerName: 'Email', 
+    flex: 0.75,
+    minWidth: 200 // Ensures the email is readable
+  },
+  { 
+    field: 'userData', 
+    headerName: 'User Data', 
+    flex: 0.5,
+    renderCell: (params) => (UserDataButton(params.row.userID)),
+    headerAlign: 'center',
+    minWidth: 100 // Buttons need a decent amount of space
+  },
+  { 
+    field: 'reports', 
+    headerName: 'Reports', 
+    flex: 0.5,
+    renderCell: (params) => (ReportButton(params.row.userID)),
+    headerAlign: 'center',
+    minWidth: 100 // Buttons need a decent amount of space
+  },
 ];
 
 //rows
@@ -39,8 +79,8 @@ export function shapeRows(patients: any[]) {
 patients = patients.map((item,index) => ({
   id: index + 1, 
   userID: item.userID,
-  firstName:'TODO',
-  lastName: 'TODO',
+  firstName: item.firstName,
+  lastName: item.lastName,
   email: item.email,
   userData : "button",
   reports: "button",
@@ -49,61 +89,94 @@ patients = patients.map((item,index) => ({
 }
 
 
-//userdatabutton func 
-async function ShowUserData(userID :number){ 
-  let result = await ViewUserData(userID);
-  if(result !== undefined){alert(JSON.stringify(result,null,4))}
-  else{alert("No data found")}
 
-}
+//userdatabutton
+export function UserDataButton(userID: number){
+  const {currentUserID } = useContext(CurrentUserIDContext);
+    //for the dialog
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+      setOpen(false);
+    }
 
-
-
-export function userDataButton(userID:number){
-    return (<div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
-    <Button onClick ={() => ShowUserData(userID)}
-    size="small" variant='contained' style={{color: "black",backgroundColor: "#d5fddbff"}}> 
-      <AccountCircleOutlinedIcon/>
-       </Button>
-       </div>);
+    const handleClick = async (userID: number) => {
+    currentUserID.current = userID;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setOpen(true);
+  };
+    return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
+      <Button onClick = {() => handleClick(userID)} 
+      size="small" 
+      variant='contained' 
+      style={{color: "black",backgroundColor: "#d5fddbff"}}> 
+        <AccountCircleOutlinedIcon/>
+      </Button>
+      <UserDialog open={open} onClose={handleClose} />
+    </div>);
 } 
 
 
 
-export function ShowReports(){
-    redirect("/dashboard/reportpage")
+//report button
+export function ReportButton(userID: number){
+
+  const {currentUserID} = useContext(CurrentUserIDContext);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
+    const handleClick = async () => {
+    setIsDataLoading(true);
+    currentUserID.current = userID;
+    redirect("/reportpage");
+  };
+
+    
+    return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
+      <Button onClick={handleClick}
+      size="small" variant='contained' style={{color: "black", backgroundColor: "#d5fddbff"}}> 
+        <SummarizeOutlinedIcon/>
+        {isDataLoading ? loader() : <></>}
+      </Button>
+       
+    </div>
+    );
 }
-
-
-export function reportButton(){
-    return ((<div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
-    <Button onClick={ShowReports}
-    size="small" variant='contained' style={{color: "black", backgroundColor: "#d5fddbff"}}> 
-      <SummarizeOutlinedIcon/>
-    </Button>
-    </div>));
-}
-
 
 
 
 //styles
 export const dataGridSx = {
-  '& .MuiDataGrid-cell': { fontSize: '1.2rem' },
-  '& .MuiDataGrid-columnHeaders': { fontSize: '1.2rem', fontWeight: 'bold' },
-  color: 'white',
-  borderColor: 'rgba(255,255,255,0.2)',
-  
-  borderRadius: 2,
-  boxShadow: 3,
+  Height:'100vh',
+  flexGrow: 1, 
+  '& .MuiDataGrid-root': {
+    fontSize: '1.2rem',
+    color: 'white',
+    borderColor: 'rgba(255,255,255,0.2)',
+  },
+  '& .MuiDataGrid-cell': {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+  },
+  '& .MuiDataGrid-columnHeaders': {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
 };
 
 export const dataGridInitialState = {
-  pagination: { paginationModel: { pageSize: 5 } },
+  pagination: { paginationModel: { pageSize: -1 } },
 };
 
-export const pageSizeOptions = [5, 10, 15, { value: -1, label: "All"}];
-
+export const boxSx = {
+  flexGrow: 1,
+  overflow: 'auto',
+  display: 'flex',
+  width: '100%',
+  flexDirection: 'column',
+  overflowX: 'auto', 
+  overflowY: 'hidden', 
+}
 
 
 

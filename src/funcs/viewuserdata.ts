@@ -15,10 +15,22 @@ export async function ViewUserData(userID:number) {
   body: JSON.stringify({userID:userID}),
   })
 
+
   if (response.ok) {
-    const result = await response.json();
-    return result;
+    const text = await response.text();
+
+    if (!text) {
+      return 'User Data not found';
+    }
+
+    try {
+      const result = JSON.parse(text);
+      return result;
+    } catch (error) {
+      console.error("Failed to parse JSON:", error);
+      throw new Error("Invalid JSON in response");
+    }
   } else {
-    throw new Error('Failed to fetch data');
+    throw new Error("Failed to fetch data");
   }
 }

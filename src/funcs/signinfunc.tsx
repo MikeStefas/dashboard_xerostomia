@@ -1,5 +1,4 @@
 'use server';
-import { redirect } from "next/navigation";
 import {BACKEND_URL} from "@/constants";
 import { cookies } from 'next/headers';
 import  { jwtDecode }  from "jwt-decode";
@@ -58,8 +57,7 @@ export async function SignIn(email: string, password:string) {
       maxAge: 60 * 60 * 7, // 7 hours
       });
 
-    //redirect to dashboard
-    redirect('/dashboard');
+    return true
     } 
   else {
     return("Wrong credentials");
