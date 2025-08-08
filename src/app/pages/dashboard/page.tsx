@@ -1,13 +1,13 @@
 "use client";
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import {MyAppBar} from '../util/appbar';
-import { theme } from '../util/theme';
+import {MyAppBar} from '../../util/appbar';
+import { theme } from '../../util/theme';
 import { useEffect } from 'react';
-import { DashboardDataGrid, shapeRows } from '../util/datagrid';
+import { DashboardDataGrid, shapeRows } from '../../util/datagrid';
 import { ViewPatients } from '@/funcs/viewpatients';
 import { useState, createContext, useContext } from 'react';
-import { loader } from '../util/loader';
+import { loader } from '../../util/loader';
 
 
 export const loaderContext = createContext<{ isDataLoading: boolean;

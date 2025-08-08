@@ -4,12 +4,12 @@ import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from '@mui/x-data-grid/models/colDef';
 import { Button } from '@mui/material';
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { resultReportContext } from '../layout';
 import Box from '@mui/material/Box';
 import { useContext, useState} from 'react';
 import {UserDialog } from './userdialog';
-import { loaderContext } from '../dashboard/page';
+import { loaderContext } from '../pages/dashboard/page';
 import { ViewUserData } from '@/funcs/viewuserdata';
 import { ViewUserReports } from '@/funcs/viewuserreport';
 //the grid
@@ -127,6 +127,7 @@ export function UserDataButton({ userID }: { userID: number }) {
 
 //report button
 export function ReportButton({ userID }: { userID: number }) {
+  const router = useRouter();
   //result set here
   const {setResult} = useContext(resultReportContext);
   const { setIsDataLoading } = useContext(loaderContext);
@@ -135,7 +136,7 @@ export function ReportButton({ userID }: { userID: number }) {
   const handleClick = async () => {
     setIsDataLoading(true);
     setResult(await ViewUserReports(userID));
-    redirect("/reportpage");
+    router.push("dashboard/reportpage");
   };
 
   return (

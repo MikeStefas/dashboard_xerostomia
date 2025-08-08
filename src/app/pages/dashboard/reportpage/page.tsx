@@ -5,12 +5,12 @@ import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from '@mui/x-data-grid/models/colDef';
-import { redirect } from 'next/navigation';
-import { resultReportContext, ResultType } from '../layout';
+import { redirect, useRouter } from 'next/navigation';
+import { resultReportContext, ResultType } from '../../../layout';
 import styles from './ReportPage.module.css';
-import { dataGridSx, dataGridInitialState } from '../util/datagrid';
+import { dataGridSx, dataGridInitialState } from '../../../util/datagrid';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '../util/theme';
+import { theme } from '../../../util/theme';
 // ---------------- Columns for DataGrid ----------------
 const columns: GridColDef[] = [
   { field: 'tongue', headerName: 'Tongue', flex: 0.5 },
@@ -40,11 +40,12 @@ function shapeRows(reports: any[]) {
 
 // -------------LOCAL AppBar Component ----------------
 function ReportAppBar({ credentials }: { credentials: string }) {
+  const router = useRouter();
   return (
     <AppBar position="static">
       <Toolbar sx={{ alignContent: 'center' }}>
         <IconButton
-          onClick={() => redirect('/dashboard')}
+          onClick={() => router.push('../dashboard')}
           size="large"
           edge="start"
           color="inherit"

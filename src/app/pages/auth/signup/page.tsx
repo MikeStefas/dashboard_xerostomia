@@ -7,8 +7,11 @@ import { useState } from 'react';
 import { SignUp } from '@/funcs/signupfunc';
 import styles from '../auth.style.module.css'; 
 import { AuthSx } from '../auth.style';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
+
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -79,8 +82,10 @@ export default function SignUpPage() {
                   const result = await SignUp(email, password, firstName, lastName);
                   if (result != undefined) {
                     alert(result)
-                  }
-                }}
+                  }else{router.push('/pages/auth/signin')}
+                  
+                }
+              }
                 sx={AuthSx.iconButton} // Apply icon button styles
               >
                 <LoginIcon sx={AuthSx.loginIcon} /> {/* Apply login icon styles */}

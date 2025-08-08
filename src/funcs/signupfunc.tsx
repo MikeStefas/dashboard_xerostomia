@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import {BACKEND_URL} from "@/constants";
-import { SignupFormSchema } from "@/app/auth/credentialtypes";
+import { SignupFormSchema } from "@/app/pages/auth/credentialtypes";
 
 
 

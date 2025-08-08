@@ -2,7 +2,7 @@
 import {BACKEND_URL} from "@/constants";
 import { cookies } from 'next/headers';
 import  { jwtDecode }  from "jwt-decode";
-import { SigninFormSchema } from "@/app/auth/credentialtypes";
+import { SigninFormSchema } from "@/app/pages/auth/credentialtypes";
 
 interface TokenPayload {
   sub: number;

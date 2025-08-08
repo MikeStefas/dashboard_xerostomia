@@ -1,10 +1,12 @@
-'use client'
+'use client';
 
-import { redirect } from 'next/navigation';
 import { Button, Typography, Box } from '@mui/material';
 import { BLUE } from '@/constants';
+import { useRouter } from 'next/navigation';
+
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div style={{
       height: '100vh',
@@ -33,7 +35,7 @@ export default function Home() {
             backgroundColor: '#2286c3',
           }
         }}
-        onClick={() => redirect('/auth/signin')}
+        onClick={() => router.push('pages/auth/signin')}
       >
         Enter
       </Button>

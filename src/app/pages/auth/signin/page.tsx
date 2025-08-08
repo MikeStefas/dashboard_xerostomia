@@ -3,18 +3,19 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { IconButton, TextField, Button, Dialog,  } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { SignIn } from '@/funcs/signinfunc';
 import styles from '../auth.style.module.css';
 import { AuthSx} from '../auth.style';
 import { redirect } from 'next/navigation';
-import CircularProgress from '@mui/material/CircularProgress';
-import { loader } from '../../util/loader';
+import { loader } from '../../../util/loader';
 import { useRouter } from 'next/navigation';
 
 
 
 export default function SignInPage() {
+  const router = useRouter(); 
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,7 +29,7 @@ export default function SignInPage() {
     if (result!=true ) {
       alert(result); 
     } else {
-      redirect('/dashboard');
+      router.push('/pages/dashboard');
     }
     setIsDataLoading(false);
   }
@@ -68,7 +69,7 @@ export default function SignInPage() {
             </div>
             <div style={{ width: '100%',display: 'flex', justifyContent: 'flex-end'}}>
               <Button
-                onClick={() => redirect('/auth/signup')}
+                onClick={() => router.push('signup')}
                 size='large'
                 sx = {{fontSize: '1.1rem', fontWeight: 'bold'}}
               >Sign Up</Button></div>
