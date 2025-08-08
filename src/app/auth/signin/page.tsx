@@ -9,7 +9,7 @@ import styles from '../auth.style.module.css';
 import { AuthSx} from '../auth.style';
 import { redirect } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
-import { loader } from './loader';
+import { loader } from '../../util/loader';
 import { useRouter } from 'next/navigation';
 
 
@@ -17,10 +17,10 @@ import { useRouter } from 'next/navigation';
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  //loader variable
-  
+  //---------SignInWrapper, function to call the SignIn function
   async function SignInWrapper(email: string, password: string) {
 
   setIsDataLoading(true);
@@ -32,9 +32,6 @@ export default function SignInPage() {
     }
     setIsDataLoading(false);
   }
-
-
-
 
 
   return (
@@ -73,6 +70,7 @@ export default function SignInPage() {
               <Button
                 onClick={() => redirect('/auth/signup')}
                 size='large'
+                sx = {{fontSize: '1.1rem', fontWeight: 'bold'}}
               >Sign Up</Button></div>
           </form>
           {/*loader*/}

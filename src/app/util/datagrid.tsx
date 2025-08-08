@@ -3,15 +3,15 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridColDef } from '@mui/x-data-grid/models/colDef';
-import { Button, DialogContent } from '@mui/material';
+import { Button } from '@mui/material';
 import { redirect } from "next/navigation";
-import { CurrentUserIDContext } from '../layout';
+import { resultReportContext } from '../layout';
 import Box from '@mui/material/Box';
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState} from 'react';
 import {UserDialog } from './userdialog';
-import { useRouter } from "next/navigation";
-import { set } from 'zod';
-import { loader } from '../auth/signin/loader';
+import { loaderContext } from '../dashboard/page';
+import { ViewUserData } from '@/funcs/viewuserdata';
+import { ViewUserReports } from '@/funcs/viewuserreport';
 //the grid
 export function DashboardDataGrid(rows :any) {
   
@@ -58,7 +58,7 @@ export const columns: GridColDef[] = [
     field: 'userData', 
     headerName: 'User Data', 
     flex: 0.5,
-    renderCell: (params) => (UserDataButton(params.row.userID)),
+    renderCell: (params) => <UserDataButton userID={params.row.userID} />,
     headerAlign: 'center',
     minWidth: 100 // Buttons need a decent amount of space
   },
@@ -66,7 +66,7 @@ export const columns: GridColDef[] = [
     field: 'reports', 
     headerName: 'Reports', 
     flex: 0.5,
-    renderCell: (params) => (ReportButton(params.row.userID)),
+    renderCell: (params) => <ReportButton userID={params.row.userID} />,
     headerAlign: 'center',
     minWidth: 100 // Buttons need a decent amount of space
   },
@@ -82,8 +82,8 @@ patients = patients.map((item,index) => ({
   firstName: item.firstName,
   lastName: item.lastName,
   email: item.email,
-  userData : "button",
-  reports: "button",
+  userData : item.userID,
+  reports: item.userID ,
 }));
   return patients;
 }
@@ -91,56 +91,65 @@ patients = patients.map((item,index) => ({
 
 
 //userdatabutton
-export function UserDataButton(userID: number){
-  const {currentUserID } = useContext(CurrentUserIDContext);
-    //for the dialog
-    const [open, setOpen] = useState(false);
-    const handleClose = () => {
-      setOpen(false);
-    }
+export function UserDataButton({ userID }: { userID: number }) {
+  const { setIsDataLoading } = useContext(loaderContext);
+  const [open, setOpen] = useState(false);
+  const [userData, setUserData] = useState<any>({});
 
-    const handleClick = async (userID: number) => {
-    currentUserID.current = userID;
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
+  const handleClick = async () => {
+    setIsDataLoading(true);
+    setUserData(await ViewUserData(userID));
+    setIsDataLoading(false); 
+    setOpen(true)
   };
-    return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
-      <Button onClick = {() => handleClick(userID)} 
-      size="small" 
-      variant='contained' 
-      style={{color: "black",backgroundColor: "#d5fddbff"}}> 
-        <AccountCircleOutlinedIcon/>
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+      <Button
+        onClick={() => {
+          handleClick();
+        }}
+        size="small"
+        variant="contained"
+        style={{ color: "black", backgroundColor: "#d5fddbff" }}
+      >
+        <AccountCircleOutlinedIcon />
       </Button>
-      <UserDialog open={open} onClose={handleClose} />
-    </div>);
-} 
+      <UserDialog open={open} onClose={handleClose} data={userData} />
+    </div>
+  );
+}
 
 
 
 //report button
-export function ReportButton(userID: number){
+export function ReportButton({ userID }: { userID: number }) {
+  //result set here
+  const {setResult} = useContext(resultReportContext);
+  const { setIsDataLoading } = useContext(loaderContext);
+  
 
-  const {currentUserID} = useContext(CurrentUserIDContext);
-  const [isDataLoading, setIsDataLoading] = useState(false);
-
-    const handleClick = async () => {
+  const handleClick = async () => {
     setIsDataLoading(true);
-    currentUserID.current = userID;
+    setResult(await ViewUserReports(userID));
     redirect("/reportpage");
   };
 
-    
-    return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" ,height: "100%"}}>
-      <Button onClick={handleClick}
-      size="small" variant='contained' style={{color: "black", backgroundColor: "#d5fddbff"}}> 
-        <SummarizeOutlinedIcon/>
-        {isDataLoading ? loader() : <></>}
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+      <Button
+        onClick={handleClick}
+        size="small"
+        variant="contained"
+        style={{ color: "black", backgroundColor: "#d5fddbff" }}
+      >
+        <SummarizeOutlinedIcon />
       </Button>
-       
     </div>
-    );
+  );
 }
 
 

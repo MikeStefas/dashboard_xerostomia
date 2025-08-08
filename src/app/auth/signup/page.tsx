@@ -9,11 +9,13 @@ import styles from '../auth.style.module.css';
 import { AuthSx } from '../auth.style';
 
 export default function SignUpPage() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
   function checkPasswordsMatch(password: string, confirmPassword: string): boolean {
     return password === confirmPassword;
   }

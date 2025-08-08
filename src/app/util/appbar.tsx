@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout } from '@mui/icons-material';
 import { LogoutFunc } from '@/funcs/logout';
-import { MenuDrawer } from './menu';
+import { MenuDrawer } from './menudrawer';
 import { useState } from 'react';
 
 

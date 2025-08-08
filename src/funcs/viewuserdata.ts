@@ -28,9 +28,9 @@ export async function ViewUserData(userID:number) {
       return result;
     } catch (error) {
       console.error("Failed to parse JSON:", error);
-      throw new Error("Invalid JSON in response");
+      return("Invalid JSON in response");
     }
   } else {
-    throw new Error("Failed to fetch data");
+    return("Failed to fetch data");
   }
 }
